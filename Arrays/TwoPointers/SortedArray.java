@@ -1,10 +1,13 @@
 package Arrays.TwoPointers;
 
+import java.util.Arrays;
+
 public class SortedArray {
 
     public static void main(String[] args) {
 
         System.out.println(pairSumExists(new int[]{10, 20, 35, 50, 75, 80}, 110));
+        System.out.println(Arrays.toString(findTriplets(new int[]{0, -1, 2, -3, 1}, 0)));
     }
 
     /**
@@ -30,5 +33,42 @@ public class SortedArray {
             }
         }
         return false;
+    } // T -> O(n), S -> O(1)
+
+    /**
+     * Given an array of distinct elements. The task is to find triplets in the array whose sum is zero.
+     * Examples: Input: arr[] = {0, -1, 2, -3, 1}
+     * Output: (0 -1 1), (2 -3 1)
+     * Explanation: The triplets with zero sum are 0 + -1 + 1 = 0 and 2 + -3 + 1 = 0
+     * Input: arr[] = {1, -2, 1, 0, 5}
+     * Output: 1 -2 1
+     * Explanation: The triplets with zero sum is 1 + -2 + 1 = 0
+     */
+    private static int[] findTriplets(int[] arr, int k) { // adding k here to support variations of the same problem
+
+        int[] triplets = new int[arr.length * 2]; // need to replace it with List<List<>>
+        int tripletFiller = 0;
+
+        Arrays.sort(arr); // T -> O(n log n)
+        for(int i = 0; i < arr.length; i++) {
+
+            int first = arr[i], second = i + 1, third = arr.length - 1;
+            int target = k - first;
+
+            while (second < third) {
+                int currSum = arr[second] + arr[third];
+                if (currSum == target) {
+                    triplets[tripletFiller++] = first;
+                    triplets[tripletFiller++] = arr[second];
+                    triplets[tripletFiller++] = arr[third];
+                    second++; third--;
+                } else if (currSum < target) {
+                    second++;
+                } else {
+                    third--;
+                }
+            }
+        }
+        return triplets;
     }
 }
