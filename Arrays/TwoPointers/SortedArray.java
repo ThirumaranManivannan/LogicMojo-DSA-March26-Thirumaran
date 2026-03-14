@@ -8,6 +8,7 @@ public class SortedArray {
 
         System.out.println(pairSumExists(new int[]{10, 20, 35, 50, 75, 80}, 110));
         System.out.println(Arrays.toString(findTriplets(new int[]{0, -1, 2, -3, 1}, 0)));
+        System.out.println(removeAllDuplicates(new int[]{1, 1, 2, 2, 2, 3, 4, 4}));
     }
 
     /**
@@ -70,5 +71,22 @@ public class SortedArray {
             }
         }
         return triplets;
-    }
+    } // T -> O(n^2) S O(len(result))
+
+    /**
+     * Given a sorted array, remove all duplicates and return the length of the modified array
+     * solution.
+     * Examples: nums = {1, 1, 2, 2, 2, 3, 4, 4}; Output: 4
+     */
+    private static int removeAllDuplicates(int[] nums) {
+
+        int length = 0;
+
+        for(int i = 1; i < nums.length; i++) {
+            if(nums[i] != nums[i - 1]) {
+                nums[++length] = nums[i];
+            }
+        }
+        return length + 1;
+    } // T -> O(n) S -> O(1)
 }
