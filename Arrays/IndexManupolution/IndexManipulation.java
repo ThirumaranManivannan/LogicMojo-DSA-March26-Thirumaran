@@ -1,4 +1,4 @@
-package Arrays.TwoPointers;
+package Arrays.IndexManupolution;
 
 import java.util.Arrays;
 
