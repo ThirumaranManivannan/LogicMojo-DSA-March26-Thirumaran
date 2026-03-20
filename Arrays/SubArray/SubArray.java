@@ -9,7 +9,9 @@ public class SubArray {
 //        findArray(new int[]{1, 4, 20, 3, 10, 5}, 33);
 //        findArray(new int[]{1, 4, 20, 3, 10, 5}, 12);
 //        findLargestSubArrayWithEq(new int[] {0, 1});
-        findLongestWithEqOddAndEven(new int[]{1, 2, 1, 2});
+        // findLongestWithEqOddAndEven(new int[]{1, 2, 1, 2});
+        // maxProductSubArray(new int[]{6, -3, -10, 0, 2});
+        maximumSubArraySum(new int[]{10, -11, 2, 3, 4});
     }
     /**
      * Given an unsorted array of integers, find a subarray that adds to a given number. If there
@@ -120,5 +122,44 @@ public class SubArray {
              System.out.printf("Maximum len %d and start %d and end %d",
                      maxLen, (end - maxLen + 1), end);
          }
+    }
+
+    /**
+     * Given an array that contains both positive and negative integers, find the product
+     * of the maximum product subarray.
+     * Input: arr[] = {6, -3, -10, 0, 2}
+     * Output: 180 // The subarray is {6, -3, -10}
+     */
+    private static void maxProductSubArray(int[] arr) {
+
+        int maxSoFar = arr[0], maxProd = arr[0], minSoFar = 0;
+
+        for(int i = 1; i < arr.length; i++) {
+
+            int temp = Math.max(Math.max(arr[i], maxSoFar * arr[i]), minSoFar * arr[i]);
+            minSoFar = Math.min(Math.min(arr[i], maxSoFar * arr[i]), minSoFar * arr[i]);
+            maxSoFar = temp;
+            maxProd = Math.max(maxProd, maxSoFar);
+        }
+        System.out.println("Maximum product: " + maxProd);
+    }
+
+    /**
+     * Given an array arr[] of size N. The task is to find the sum of the contiguous subarray within a
+     * arr[] with the largest sum.
+     * A[]= { -2, -3, 4, -1, -2, 1, 5, -3 };
+     * Maximum contiguous sum is 7
+     * Starting index 2
+     * Ending index 6
+     */
+    private static void maximumSubArraySum(int[] arr) {
+        int maxSum = arr[0];
+        int currSum = arr[0];
+
+        for (int i = 1; i < arr.length; i++) {
+           currSum = Math.max(arr[i], currSum + arr[i]);
+           maxSum = Math.max(maxSum, currSum);
+        }
+        System.out.println("Max sum: " + maxSum);
     }
 }
