@@ -3,6 +3,7 @@ package Arrays.AssignmentMar152026;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Solutions {
 
@@ -143,6 +144,9 @@ public class Solutions {
 
             if(height.get(left) < height.get(right)){
                 left++;
+            } else if (Objects.equals(height.get(left), height.get(right))){
+                left++;
+                right--;
             } else {
                 right--;
             }
