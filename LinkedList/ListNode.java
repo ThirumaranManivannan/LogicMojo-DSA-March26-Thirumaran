@@ -16,6 +16,9 @@ public class ListNode<T> {
     }
 
     public void add(T data) {
+        if(this.tail == null) {
+            this.tail = this;
+        }
         this.tail.next = new ListNode<>(data);
         this.tail = this.tail.next;
     }
